@@ -28,7 +28,8 @@ function setDelay(i) {
 //MAIN PROGRAM
 //-------------------------------------------
 for (var i = 0; i < urlTargets.length; i++) {
-		window.open(urlTargets[i],'tab' + i);
+	win[i] = window.open(urlTargets[i],'tab' + i);
+	
 }// Open tabs
 
 
@@ -42,7 +43,6 @@ for (var i = 0; i < urlTargets.length; i++) {
 for (var i = 0; i < urlTargets.length; i++) {
     setTimeout(function(x) { return function() { 
 		console.log('Refocus ' +x + ': ' + urlTargets[x]);
-		window.blur();
 		win[x].close();
 		}; }(i), 10000*i);	// Open tabs
 }
