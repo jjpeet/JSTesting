@@ -33,16 +33,9 @@ for (var i = 0; i < urlTargets.length; i++) {
 }// Open tabs
 
 
-/*for (var i = 0; i < urlTargets.length; i++) {
-    setTimeout(function(x) { return function() { 
-		console.log('Open ' + x + ': ' + urlTargets[x]);
-		win[x] = window.open(urlTargets[x],'tab' + x);
-		}; }(i), 10000*i);	// Open tabs
-}*/
-
 for (var i = 0; i < urlTargets.length; i++) {
     setTimeout(function(x) { return function() { 
 		console.log('Refocus ' +x + ': ' + urlTargets[x]);
 		win[x].close();
-		}; }(i), 10000*i);	// Open tabs
+		}; }(i), 10000*(i+1));	// Open tabs
 }
