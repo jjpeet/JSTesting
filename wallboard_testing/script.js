@@ -11,8 +11,8 @@ var win = [];
 // FUNCTIONS
 //-------------------------------------------
 function openInNewTab(url) {
-    newWin = window.open(url);
-	return openWin;
+    var newWin = window.open(url);
+	return newWin;
 }// openInNewTab Function
 
 function closeTab(closeWin){
@@ -42,7 +42,7 @@ for (var i = 0; i < urlTargets.length; i++) {
 for (var i = 0; i < urlTargets.length; i++) {
     setTimeout(function(x) { return function() { 
 		console.log('Refocus ' +x + ': ' + urlTargets[x]);
-		windows.blur();
+		window.blur();
 		win[x].close();
 		}; }(i), 10000*i);	// Open tabs
 }
