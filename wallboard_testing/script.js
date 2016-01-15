@@ -7,12 +7,25 @@ var urlTargets = [
 var secondsPerTab = 5;
 var mSecondsPerTab = secondsPerTab * 1000;
 var win = [];
-var timeHandler;
+var urlIndex = 0;
+var startbutton = document.getElementById("startbutton");
+var stopbutton = document.getElementById("stopbutton");
+
 
 
 // FUNCTIONS
 //-------------------------------------------
-
+function ChangeTab(){
+	win[urlIndex].close();
+	win[urlIndex+1] = window.open(urlTargets[urlIndex+1]);
+	console.log(urlIndex);
+	urlIndex++
+	if(urlIndex >= urlTargets.length) {
+		win[urlIndex].close();
+		urlIndex = 0;
+		win[urlIndex]=window.open(urlTargets[urlIndex]);
+	}
+}
 
 
 
@@ -26,18 +39,13 @@ var output = '<ul>';
 output += '</ul>';
 $('#update').html(output); //Display URL Targets in list
 
-$('#startbutton').click(function(){
-	console.log('Stert');
-	timeHandler = setInterval(function(y){ return function () {
-		for (var i = 0; i < urlTargets.length; i++) {
-		    	setTimeout(function(x) { return function() { 
-				win[x] = window.open(urlTargets[x]);
-				}; }(i), mSecondsPerTab*(i));	// Open tabs
-				
-		    	setTimeout(function(x) { return function() { 
-				win[x].close();
-				}; }(i), mSecondsPerTab*(i+1));	// Close tabs
-		}	//Tab opener-closer	
-	}}); // Time handler
-}); // Start button
+console.log(urlTargets.length);
 
+win[urlIndex]=window.open(urlTargets[urlIndex]);
+
+var intervalHandler = setInterval(ChangeTab,mSecondsPerTab);
+
+stopbutton.onclick = function (){
+	clearInterval(intervalHandler);
+	win[urlIndex].close();
+};
