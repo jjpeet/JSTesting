@@ -3,13 +3,18 @@ var urlTargets = [
 	'http://www.bom.gov.au/products/IDR503.loop.shtml#skip',
 	];
 
-var loops = 2;
-var secondsPerTab = 10;
+
+var secondsPerTab = 5;
 var mSecondsPerTab = secondsPerTab * 1000;
 var win = [];
+var timeHandler;
+
 
 // FUNCTIONS
 //-------------------------------------------
+
+
+
 
 
 //MAIN PROGRAM
@@ -21,14 +26,18 @@ var output = '<ul>';
 output += '</ul>';
 $('#update').html(output); //Display URL Targets in list
 
+$('#startbutton').click(function(){
+	console.log('Stert');
+	timeHandler = setInterval(function(y){ return function () {
+		for (var i = 0; i < urlTargets.length; i++) {
+		    	setTimeout(function(x) { return function() { 
+				win[x] = window.open(urlTargets[x]);
+				}; }(i), mSecondsPerTab*(i));	// Open tabs
+				
+		    	setTimeout(function(x) { return function() { 
+				win[x].close();
+				}; }(i), mSecondsPerTab*(i+1));	// Close tabs
+		}	//Tab opener-closer	
+	}}); // Time handler
+}); // Start button
 
-//Tab opener-closer
-for (var i = 0; i < urlTargets.length; i++) {
-    	setTimeout(function(x) { return function() { 
-		win[x] = window.open(urlTargets[x]);
-		}; }(i), mSecondsPerTab*(i));	// Open tabs
-		
-    	setTimeout(function(x) { return function() { 
-		win[x].close();
-		}; }(i), mSecondsPerTab*(i+1));	// Close tabs
-}
