@@ -7,19 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <title>QLD Fish Data Fix</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="../../dist/css/bootstrap-theme.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/1-col-portfolio.css" rel="stylesheet">
-
-    <style>
-      #map { position:absolute; top:0; bottom:0; width:100%; }
-    </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -30,7 +27,6 @@
 </head>
 
 <body>
-    <div id='map'></div>
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -42,7 +38,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="./">Mapbox Testing</a>
+                <a class="navbar-brand" href="./">FishID Grid</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -68,12 +64,22 @@
                     </div>
                 </form>
         </div>
+        
         <div ng-controller="FishIDController as fishID">
             <!-- /.row -->
                 <div class="row">
-                    <div class="col-md-10">
+                    <div dir-paginate="item in fishID.items|orderBy:'FamilyName1'|filter:search|itemsPerPage:100" ng-hide="item.Image1 == 'N/A'" >
+                        <div class="col-md-3" ng-show="item.Image1">
+                            <a href="{{item.Image1}}"><img class="img-thumbnail" ng-src="{{item.Image1}}" alt="{{item.CommonName}}"></a>
+                        </div>
                     </div>
             </div>
+
+                <div class="row text-center">
+                    <div class="col-lg-12">
+                        <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" ></dir-pagination-controls>
+                    </div>
+                </div>
         </div>
  
         <!-- Footer -->
@@ -106,18 +112,16 @@
     <script src="js/dirPagination.js"></script>
     <script src="js/app.js"></script>
 
-    <!-- Mapbox JS and CSS -->
-    <script src='https://api.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet' />
-
     <script> 
-
-    /* Mapbox */
-      mapboxgl.accessToken = 'pk.eyJ1IjoiampwZWV0IiwiYSI6ImNpcHFjMm5hcTA1cjhmb20zYzh0cG83MGwifQ.QDYqa38N0tOzqMQtxQNOlA';
-      var map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/jjpeet/cipvrrqk2000qbcnm0q6vethr'
-      });
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        
+    /* global ga */
+      ga('create', 'UA-22365811-5', 'auto');
+      ga('send', 'pageview');
+    
     </script>
 
     
