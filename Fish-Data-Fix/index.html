@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="fishID">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>QLD FishID</title>
+    <meta name="Description" content="Photos and details of fish found in the waters of Queensland, Australia.">
+    <meta name="Keywords" content="JJPEET.COM, FishID, Fish, Fish identification, QLD, Queensland, data.qld.gov.au">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/1-col-portfolio.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+</head>
+
+<body>
+ 
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="./">FishID (beta)</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <!-- Page Heading -->
+        <div class="row">
+                <form class="form-inline">
+                    <div class="form-group">
+                    <div class="col-xs-9"><input type="text" ng-model="search" class="form-control" placeholder="Search"></div>
+                    </div>
+                </form>
+        </div>
+        
+        <div ng-controller="FishIDController as fishID">
+            <div dir-paginate="item in fishID.items|orderBy:'FamilyName1'|filter:search|itemsPerPage:10" ng-hide="item.Image1 == 'N/A'" >
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-7" ng-show="item.Image1">
+                    <a href="#">
+                        <img class="img-responsive" ng-src="{{item.Image1}}" width="500" alt="">
+                    </a>
+                </div>
+                <div class="col-md-5">
+                    
+                    <div class="col-xs-12"><h4>{{item.CommonName}}<br>
+                        <small>Also known as: {{item.AlsoKnownAs}}<br>
+                        Family: {{item.FamilyName1}}</small></h4>
+                    </div>
+                    <div class="col-xs-4" ng-hide="item.MinSize == 'N/A'">Min {{item.MinSize}}cm</div>
+                    <div class="col-xs-4" ng-hide="item.MaxSize == 'N/A'">Max {{item.MaxSize}}cm</div>
+                    <div class="col-xs-4" ng-hide="item.PossessionLimit == 'N/A'">Bag {{item.PossessionLimit}}</div>
+                    <div class="col-xs-12">
+                        <p ng-hide="item.Description == 'N/A'"><strong>Description: </strong>{{item.Description}}</p>
+                        <p ng-hide="item.Distribution == 'N/A'"><strong>Distribution: </strong>{{item.Distribution}}</p>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+
+            <!-- Pagination -->
+                        
+
+        <div class="row text-center">
+            <div class="col-lg-12">
+                <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" ></dir-pagination-controls>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <hr>
+        
+        </div>
+        
+
+
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-md-8">
+                    <p>
+                        
+                        <a href="/general.aspx?id=142">
+                            <img src="./ccby.png" alt="Creative Commons - By Attribution">
+                    </a> 
+                    Licensed under Creative Commons Attribution 4.0
+                    </p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Angular JavaScript -->
+    <script src="js/angular.min.js"></script>
+    <script src="js/dirPagination.js"></script>
+    <script src="js/app.js"></script>
+
+    <script> 
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        
+    /* global ga */
+      ga('create', 'UA-22365811-5', 'auto');
+      ga('send', 'pageview');
+    
+    </script>
+
+    
+</body>
+
+</html>
